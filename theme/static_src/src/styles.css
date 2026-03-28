@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+
+@theme {
+  /* Using the exact hex codes for a professional 'Archive' look */
+  --color-primary: #1e1b4b;        /* indigo-950 */
+  --color-secondary: #475569;      /* slate-600 */
+  --color-accent: #d97706;         /* amber-600 */
+  --color-surface: #f8fafc;        /* slate-50 (Background) */
+}
+
+@source "../../../**/*.{html,py,js}";
+
+@layer base {
+  /* This targets the raw HTML that Django / Allauth generates */
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"], 
+  input[type="number"],
+  select, 
+  textarea {
+    @apply w-full rounded-lg border-gray-300 bg-white px-4 py-2 text-gray-900 shadow-sm transition;
+    @apply focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-hidden;
+  }
+
+  /* Make the labels look professional */
+  label {
+    @apply mb-1 block text-sm font-medium text-gray-700;
+  }
+}
