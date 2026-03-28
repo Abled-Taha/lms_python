@@ -1,0 +1,23 @@
+[tools]
+uv = "latest"
+
+[env]
+_.python.venv = "{{config_root}}/.venv"
+
+[tasks."setup"]
+description = "Install all dependencies"
+run = """
+  echo "--- Setting up Django with uv ---"
+  uv sync
+
+  echo "--- Setup Complete! ---"
+"""
+
+[tasks."migrate"]
+description = "Sync database schema with models"
+run = "uv run python manage.py migrate"
+
+[tasks."dev"]
+description = "Run DEV server"
+depends = ["migrate"]
+run = "uv run python manage.py tailwind dev"
