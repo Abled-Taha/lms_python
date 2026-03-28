@@ -1,0 +1,22 @@
+<div x-data="{ toggle: {% if value %}true{% else %}false{% endif %} }">
+    <label for="{{ id }}" class="flex items-center cursor-pointer">
+        <input type="checkbox" 
+               id="{{ id }}" 
+               name="{{ name }}" 
+               class="sr-only" 
+               x-model="toggle"
+               {% if checked %}checked{% endif %}>
+        
+        <div class="relative w-14 h-8 transition-colors duration-200 rounded-full shadow-inner" 
+             :class="toggle ? 'bg-primary' : 'bg-gray-300'">
+            <div class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-200" 
+                 :class="toggle ? 'translate-x-6' : 'translate-x-0'"></div>
+        </div>
+        
+        {% if label %}
+        <div class="ml-3 text-secondary font-medium">
+            <span>{{ label }}</span>
+        </div>
+        {% endif %}
+    </label>
+</div>
