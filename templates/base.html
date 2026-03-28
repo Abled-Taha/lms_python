@@ -1,0 +1,36 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>LMS - Library Management System</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    {% tailwind_css %}
+    {% block extra_css %}{% endblock %} <!-- This block can be used for page specific css --> <!-- Global css can be applied in theme/static_src/src/styles.css -->
+    <script src="{% static 'js/htmx.min.js' %}"></script>
+    <script src="{% static 'js/alpine.min.js' %}" defer></script>
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans leading-normal tracking-normal">
+    {% if messages %}
+    <div class="max-w-7xl mx-auto px-4 mt-4"
+        x-data="{ show: true }" 
+        x-init="setTimeout(() => show = false, 3000)" 
+        x-show="show"
+        x-transition
+    >
+        {% for message in messages %}
+        <div class="p-4 rounded-lg {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-blue-50 text-blue-700 border border-blue-200{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
