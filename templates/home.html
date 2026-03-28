@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col">
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100" x-data="{ open: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-cinzel font-bold text-primary tracking-wider">LMS</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#" class="text-secondary hover:text-primary transition">Collection</a>
+                    <a href="#" class="text-secondary hover:text-primary transition">Events</a>
+                    <a href="/dashboard/" class="bg-primary text-white px-5 py-2.5 rounded-full hover:shadow-lg hover:shadow-indigo-900/20 transition-all">
+                        Open Dashboard
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button @click="open = !open" class="text-primary focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path :class="{'hidden': open, 'inline-flex': !open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path><path :class="{'hidden': !open, 'inline-flex': open }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div x-show="open" x-transition class="md:hidden bg-white border-b border-gray-100 px-4 py-4 space-y-3">
+            <a href="/dashboard/" class="block font-bold text-primary">Open Dashboard</a>
+        </div>
+    </nav>
+
+    <header class="relative bg-surface pt-20 pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-5xl md:text-7xl font-cinzel font-bold text-primary mb-6 leading-tight">
+                Where Knowledge <br> <span class="text-accent italic">Meets Flow.</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-lg md:text-xl text-secondary mb-10 leading-relaxed">
+                Step into a modern sanctuary of literature. LMS is more than a library management system; it’s a gateway to your next great discovery.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="/dashboard/" class="px-8 py-4 bg-primary text-white rounded-xl font-semibold shadow-xl shadow-indigo-950/20 hover:-translate-y-1 transition-all">
+                    Explore the Archive
+                </a>
+                <a href="/accounts/signup/" class="px-8 py-4 bg-white border border-gray-200 text-primary rounded-xl font-semibold hover:bg-gray-50 transition-all">
+                    Become a Member
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-10 pointer-events-none">
+            <div class="absolute top-20 left-10 w-64 h-64 bg-accent rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-10 w-96 h-96 bg-primary rounded-full blur-3xl"></div>
+        </div>
+    </header>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <div class="p-8 rounded-2xl bg-surface border border-gray-100 hover:border-accent/30 transition group">
+                    <div class="w-12 h-12 bg-accent/10 text-accent rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">50,000+ Titles</h3>
+                    <p class="text-secondary">From ancient manuscripts to modern engineering journals.</p>
+                </div>
+                
+                <div class="p-8 rounded-2xl bg-surface border border-gray-100 hover:border-accent/30 transition group">
+                    <div class="w-12 h-12 bg-accent/10 text-accent rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Instant Borrowing</h3>
+                    <p class="text-secondary">Reserve books via our dashboard and pick them up in seconds.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-surface border border-gray-100 hover:border-accent/30 transition group">
+                    <div class="w-12 h-12 bg-accent/10 text-accent rounded-lg flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Active Community</h3>
+                    <p class="text-secondary">Join weekly reading circles and technical workshops.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-auto py-12 bg-primary text-white/60 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 LMS. Built for readers, by readers.</p>
+        </div>
+    </footer>
+</div>
+{% endblock %}
