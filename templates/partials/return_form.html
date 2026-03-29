@@ -1,0 +1,47 @@
+<div x-data="{ 
+    deposit: {{ loan.deposit_amount }}, 
+    deduction: 0,
+    get refund() { 
+        let lateDays = {{ overdue_days|default:0 }};
+        let latePenalty = lateDays * 100;
+        let total = this.deposit - latePenalty - this.deduction;
+        return total > 0 ? total : 0;
+    } 
+}">
+    <h2 class="text-xl font-bold mb-4 text-slate-800">Return: {{ loan.book.title }}</h2>
+    
+    <div class="bg-slate-50 p-3 rounded-lg mb-4 text-sm space-y-1">
+        <p>Initial Deposit: <span class="font-mono">Rs. {{ loan.deposit_amount }}</span></p>
+        {% if overdue_days > 0 %}
+            <p class="text-red-600">Late Penalty ({{ overdue_days }} days): <span class="font-mono">-Rs. {{ late_penalty }}</span></p>
+        {% endif %}
+    </div>
+
+    <form hx-post="{% url 'return_book_submit' loan.id %}" hx-target="#modal-body">
+        {% csrf_token %}
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-slate-700">Damage Deduction (Rs.)</label>
+                <input type="number" name="damage_deduction" x-model.number="deduction"
+                       class="w-full border-slate-300 rounded-lg p-2 mt-1" placeholder="0">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-slate-700">Damage Description</label>
+                <textarea name="damage_notes" rows="2" 
+                          class="w-full border-slate-300 rounded-lg p-2 mt-1" 
+                          placeholder="e.g. Back cover torn, liquid stains..."></textarea>
+            </div>
+
+            <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 text-center">
+                <p class="text-xs text-emerald-600 uppercase font-bold tracking-wider">Final Refund Amount</p>
+                <p class="text-3xl font-bold text-emerald-700">Rs. <span x-text="refund"></span></p>
+            </div>
+
+            <button type="submit" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">
+                Confirm Return & Refund
+            </button>
+        </div>
+    </form>
+</div>

@@ -10,9 +10,18 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% block extra_css %}{% endblock %} <!-- This block can be used for page specific css --> <!-- Global css can be applied in theme/static_src/src/styles.css -->
     <script src="{% static 'js/htmx.min.js' %}"></script>
     <script src="{% static 'js/alpine.min.js' %}" defer></script>
+    <script>
+        document.body.addEventListener('htmx:beforeSwap', function(evt) {
+            if (evt.detail.xhr.status === 403 || evt.detail.xhr.status === 401) {
+                // If unauthorized, redirect the whole window to login
+                window.location.href = '/accounts/login/';
+            }
+        });
+    </script>
 </head>
 
 <body class="bg-gray-50 text-gray-900 font-sans leading-normal tracking-normal">
@@ -32,5 +41,29 @@
     {% endif %}
     {% block content %}
     {% endblock %}
+    <!-- Empty Modal Shell -->
+    <div x-data="{ open: false }" 
+        @open-modal.window="open = true" 
+        @close-modal.window="open = false"
+        x-cloak>
+        
+        <div x-show="open" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+            
+            <div @click.away="open = false" 
+                class="bg-white w-full max-w-lg rounded-2xl shadow-2xl relative overflow-hidden animate__animated animate__zoomIn animate__faster">
+                
+                <button @click="open = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+
+                <div id="modal-body" class="p-8">
+                    </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,14 @@
+{% for book in books %}
+<div class="p-4 border rounded-xl shadow-sm bg-white">
+    <h3 class="font-bold text-lg text-primary">{{ book.title }}</h3>
+    <p class="text-secondary mb-4">Available: {{ book.available_copies }}</p>
+    
+    <button hx-get="{% url 'issue_book_form' book.id %}" 
+            hx-target="#modal-body" 
+            class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+        Issue This Book
+    </button>
+</div>
+{% empty %}
+    <p>No books found.</p>
+{% endfor %}

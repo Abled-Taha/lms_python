@@ -1,8 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>dashboard</h1>
-<a href="/admin/">Admin</a>
-<br>
-<a href="/accounts/logout/">Logout</a>
+<h1 class="text-2xl font-bold mb-4">LMS Dashboard</h1>
+<div class="flex gap-4 mb-6">
+    <a href="/admin/" class="text-blue-600 underline">Admin</a>
+    <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="text-red-600 underline">Logout</button>
+    </form>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <div class="lg:col-span-2">
+        <h2 class="text-xl font-bold mb-4">Book Inventory</h2>
+        <div id="book-grid" 
+             hx-get="{% url 'book_list_partial' %}" 
+             hx-trigger="refresh-book-list from:body">
+            {% include "partials/book_list.html" %}
+        </div>
+    </div>
+
+    <div>
+        <h2 class="text-xl font-bold mb-4">Active Loans</h2>
+        {% include "partials/active_loans_list.html" %}
+    </div>
+</div>
+
 {% endblock %}
