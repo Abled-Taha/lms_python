@@ -15,9 +15,9 @@ run = """
 
 [tasks."migrate"]
 description = "Sync database schema with models"
-run = "uv run python manage.py migrate"
+run = "python manage.py migrate"
 
 [tasks."dev"]
 description = "Run DEV server"
 depends = ["migrate"]
-run = "uv run python manage.py tailwind dev"
+run = "python manage.py tailwind dev"
