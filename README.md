@@ -6,11 +6,12 @@
 6. You are all done. "mise run dev" can be used to start the dev server.
 ---
 
-1. whitenoise
-2. gunicorn/uvicorn
-3. sitemap
-4. google console
-5. open graph
-6. cloudflare
-7. dynamic link generation under the website name in a search engine
-8. mise run prod
+0. whitenoise
+0. gunicorn/uvicorn
+0. sitemap
+0. google console
+0. open graph
+0. cloudflare
+0. dynamic link generation under the website name in a search engine
+0. mise run prod
+0. docker
